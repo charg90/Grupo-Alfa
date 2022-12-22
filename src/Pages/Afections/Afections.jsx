@@ -364,7 +364,7 @@ const Afections = () => {
             backgroundColor="primary.main"
             padding={1}
             borderRadius={6}
-            sx={{ position: "sticky", top: "80px" }}
+            sx={{ position: "sticky", top: "80px", color: "#fafafa" }}
           >
             <p>Total Point :{total} </p>
           </Box>
