@@ -1,4 +1,19 @@
-import React, { useState } from "react";
+import {
+  Box,
+  Divider,
+  Paper,
+  Switch,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2";
+import { Stack } from "@mui/system";
+import React, { useEffect, useState } from "react";
+import alfaLogo from "../../assets/GrupoAlfa logo.png";
 import {
   respiratorio,
   vigilancia,
@@ -25,7 +40,7 @@ const Afections = () => {
       return { ...obj, active: false };
     })
   );
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState();
   console.log(total);
 
   const handleChange = (id) => {
@@ -35,208 +50,326 @@ const Afections = () => {
     setIsChecked(checkedItems);
   };
 
-  const handleTotal = () => {
-    console.log("hola");
-    const totalPoints = isChecked.reduce((sum, state) => {
-      if (state.active === true) {
-        return sum + state.points;
-      } else {
-        return sum;
-      }
-    }, 0);
+  const totalPoints = isChecked.reduce((sum, state) => {
+    if (state.active === true) {
+      return sum + state.points;
+    }
+    return sum;
+  }, 0);
+  useEffect(() => {
     setTotal(totalPoints);
-  };
+  }, [isChecked]);
 
   return (
     <>
-      {" "}
-      <h1>Afections</h1>
-      <h3>respiratorias</h3>
-      <table>
-        <tr>
-          <th>Nombre</th>
-          <th>Puntos</th>
-        </tr>
-        {respiratorio.map((resp) => {
-          return (
-            <tbody key={resp.id}>
-              <tr>
-                <td>{resp.name}</td>
-                <td>{resp.points}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    onChange={() => handleChange(resp.id)}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          );
-        })}
-      </table>
-      <h3>Vigilancia</h3>
-      <table>
-        <tr>
-          <th>Nombre</th>
-          <th>Puntos</th>
-        </tr>
-        {vigilancia.map((resp) => {
-          return (
-            <tbody key={resp.id}>
-              <tr>
-                <td>{resp.name}</td>
-                <td>{resp.points}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    onChange={() => handleChange(resp.id)}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          );
-        })}
-      </table>
-      <h3>Cardiovascular</h3>
-      <table>
-        <tr>
-          <th>Nombre</th>
-          <th>Puntos</th>
-        </tr>
-        {cardiovascular.map((resp) => {
-          return (
-            <tbody key={resp.id}>
-              <tr>
-                <td>{resp.name}</td>
-                <td>{resp.points}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    onChange={() => handleChange(resp.id)}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          );
-        })}
-      </table>
-      <h3>Acceso Vascular</h3>
-      <table>
-        <tr>
-          <th>Nombre</th>
-          <th>Puntos</th>
-        </tr>
-        {accesoVascular.map((resp) => {
-          return (
-            <tbody key={resp.id}>
-              <tr>
-                <td>{resp.name}</td>
-                <td>{resp.points}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    onChange={() => handleChange(resp.id)}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          );
-        })}
-      </table>
-      <h3>Metabolico Nutricion</h3>
-      <table>
-        <tr>
-          <th>Nombre</th>
-          <th>Puntos</th>
-        </tr>
-        {metabolicoNutricion.map((resp) => {
-          return (
-            <tbody key={resp.id}>
-              <tr>
-                <td>{resp.name}</td>
-                <td>{resp.points}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    onChange={() => handleChange(resp.id)}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          );
-        })}
-      </table>
-      <h3>Transfuciones</h3>
-      <table>
-        <tr>
-          <th>Nombre</th>
-          <th>Puntos</th>
-        </tr>
-        {transfusiones.map((resp) => {
-          return (
-            <tbody key={resp.id}>
-              <tr>
-                <td>{resp.name}</td>
-                <td>{resp.points}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    onChange={() => handleChange(resp.id)}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          );
-        })}
-      </table>
-      <h3>Procedimientos</h3>
-      <table>
-        <tr>
-          <th>Nombre</th>
-          <th>Puntos</th>
-        </tr>
-        {procedimientos.map((resp) => {
-          return (
-            <tbody key={resp.id}>
-              <tr>
-                <td>{resp.name}</td>
-                <td>{resp.points}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    onChange={() => handleChange(resp.id)}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          );
-        })}
-      </table>
-      <h3>Terapia de drogas</h3>
-      <table>
-        <tr>
-          <th>Nombre</th>
-          <th>Puntos</th>
-        </tr>
-        {terapiaDeDrogras.map((resp) => {
-          return (
-            <tbody key={resp.id}>
-              <tr>
-                <td>{resp.name}</td>
-                <td>{resp.points}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    onChange={() => handleChange(resp.id)}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          );
-        })}
-      </table>
-      <button onClick={() => handleTotal()}>Caluclar</button>
-      <p>total Point :{total} </p>
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={3}
+        mb={4}
+        padding={2}
+      >
+        <img src={alfaLogo} alt="alfaLogo" height={80} width={80} />
+        <h1 align="center">Formulario SArasasa</h1>
+      </Stack>
+      <Grid container gap={3} justifyContent="center">
+        <Grid container xs={10} gap={2}>
+          {" "}
+          <TableContainer component={Paper} sx={{ maxWidth: 400 }}>
+            <h3 align="center">Respiratorias</h3>
+            <Divider />
+            <Table aria-label="simple table" size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontWeight: "700" }}>Nombre</TableCell>
+                  <TableCell sx={{ fontWeight: "700" }}>Puntos</TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {respiratorio.map((resp, index) => {
+                  return (
+                    <TableRow
+                      key={resp.id}
+                      sx={{
+                        backgroundColor:
+                          index % 2 === 0 ? "primary.light" : null,
+                      }}
+                    >
+                      <TableCell>{resp.name}</TableCell>
+                      <TableCell align="center">{resp.points}</TableCell>
+                      <TableCell>
+                        <Switch
+                          onChange={() => handleChange(resp.id)}
+                          color="primary"
+                        />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TableContainer component={Paper} sx={{ maxWidth: 400 }}>
+            <h3 align="center">Vigilancia</h3>
+            <Divider />
+            <Table aria-label="simple table" size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontWeight: "700" }}>Nombre</TableCell>
+                  <TableCell sx={{ fontWeight: "700" }}>Puntos</TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {vigilancia.map((resp, index) => {
+                  return (
+                    <TableRow
+                      key={resp.id}
+                      sx={{
+                        backgroundColor:
+                          index % 2 === 0 ? "primary.light" : null,
+                      }}
+                    >
+                      <TableCell>{resp.name}</TableCell>
+                      <TableCell align="center">{resp.points}</TableCell>
+                      <TableCell>
+                        <Switch
+                          onChange={() => handleChange(resp.id)}
+                          color="primary"
+                        />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TableContainer component={Paper} sx={{ maxWidth: 400 }}>
+            <h3 align="center">Cardiovascular</h3>
+            <Divider />
+            <Table aria-label="simple table" size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontWeight: "700" }}>Nombre</TableCell>
+                  <TableCell sx={{ fontWeight: "700" }}>Puntos</TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {cardiovascular.map((resp, index) => {
+                  return (
+                    <TableRow
+                      key={resp.id}
+                      sx={{
+                        backgroundColor:
+                          index % 2 === 0 ? "primary.light" : null,
+                      }}
+                    >
+                      <TableCell>{resp.name}</TableCell>
+                      <TableCell align="center">{resp.points}</TableCell>
+                      <TableCell>
+                        <Switch
+                          onChange={() => handleChange(resp.id)}
+                          color="primary"
+                        />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TableContainer component={Paper} sx={{ maxWidth: 400 }}>
+            <h3 align="center">Acceso Vascular</h3>
+            <Divider />
+            <Table aria-label="simple table" size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontWeight: "700" }}>Nombre</TableCell>
+                  <TableCell sx={{ fontWeight: "700" }}>Puntos</TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {accesoVascular.map((resp, index) => {
+                  return (
+                    <TableRow
+                      key={resp.id}
+                      sx={{
+                        backgroundColor:
+                          index % 2 === 0 ? "primary.light" : null,
+                      }}
+                    >
+                      <TableCell>{resp.name}</TableCell>
+                      <TableCell align="center">{resp.points}</TableCell>
+                      <TableCell>
+                        <Switch
+                          onChange={() => handleChange(resp.id)}
+                          color="primary"
+                        />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TableContainer component={Paper} sx={{ maxWidth: 400 }}>
+            <h3 align="center">Metabolico Nutricion</h3>
+            <Divider />
+            <Table aria-label="simple table" size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontWeight: "700" }}>Nombre</TableCell>
+                  <TableCell sx={{ fontWeight: "700" }}>Puntos</TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {metabolicoNutricion.map((resp, index) => {
+                  return (
+                    <TableRow
+                      key={resp.id}
+                      sx={{
+                        backgroundColor:
+                          index % 2 === 0 ? "primary.light" : null,
+                      }}
+                    >
+                      <TableCell>{resp.name}</TableCell>
+                      <TableCell align="center">{resp.points}</TableCell>
+                      <TableCell>
+                        <Switch
+                          onChange={() => handleChange(resp.id)}
+                          color="primary"
+                        />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TableContainer component={Paper} sx={{ maxWidth: 400 }}>
+            <h3 align="center">Transfuciones</h3>
+            <Divider />
+            <Table aria-label="simple table" size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontWeight: "700" }}>Nombre</TableCell>
+                  <TableCell sx={{ fontWeight: "700" }}>Puntos</TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {transfusiones.map((resp, index) => {
+                  return (
+                    <TableRow
+                      key={resp.id}
+                      sx={{
+                        backgroundColor:
+                          index % 2 === 0 ? "primary.light" : null,
+                      }}
+                    >
+                      <TableCell>{resp.name}</TableCell>
+                      <TableCell align="center">{resp.points}</TableCell>
+                      <TableCell>
+                        <Switch
+                          onChange={() => handleChange(resp.id)}
+                          color="primary"
+                        />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TableContainer component={Paper} sx={{ maxWidth: 400 }}>
+            <h3 align="center">Procedimientos</h3>
+            <Divider />
+            <Table aria-label="simple table" size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontWeight: "700" }}>Nombre</TableCell>
+                  <TableCell sx={{ fontWeight: "700" }}>Puntos</TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {procedimientos.map((resp, index) => {
+                  return (
+                    <TableRow
+                      key={resp.id}
+                      sx={{
+                        backgroundColor:
+                          index % 2 === 0 ? "primary.light" : null,
+                      }}
+                    >
+                      <TableCell>{resp.name}</TableCell>
+                      <TableCell align="center">{resp.points}</TableCell>
+                      <TableCell>
+                        <Switch
+                          onChange={() => handleChange(resp.id)}
+                          color="primary"
+                        />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TableContainer component={Paper} sx={{ maxWidth: 400 }}>
+            <h3 align="center">Terapia de drogas</h3>
+            <Divider />
+            <Table aria-label="simple table" size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontWeight: "700" }}>Nombre</TableCell>
+                  <TableCell sx={{ fontWeight: "700" }}>Puntos</TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {terapiaDeDrogras.map((resp, index) => {
+                  return (
+                    <TableRow
+                      key={resp.id}
+                      sx={{
+                        backgroundColor:
+                          index % 2 === 0 ? "primary.light" : null,
+                      }}
+                    >
+                      <TableCell>{resp.name}</TableCell>
+                      <TableCell align="center">{resp.points}</TableCell>
+                      <TableCell>
+                        <Switch
+                          onChange={() => handleChange(resp.id)}
+                          color="primary"
+                        />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+        <Grid>
+          <Box
+            minWidth={100}
+            maxHeight={100}
+            backgroundColor="primary.main"
+            padding={1}
+            borderRadius={6}
+            sx={{ position: "sticky", top: "80px" }}
+          >
+            <p>Total Point :{total} </p>
+          </Box>
+        </Grid>
+      </Grid>
     </>
   );
 };
