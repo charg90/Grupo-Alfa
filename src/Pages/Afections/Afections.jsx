@@ -14,7 +14,7 @@ import {
 import Grid from "@mui/material/Unstable_Grid2";
 import { Stack } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import alfaLogo from "../../assets/GrupoAlfa logo.png";
+
 import {
   respiratorio,
   vigilancia,
@@ -25,6 +25,7 @@ import {
   procedimientos,
   terapiaDeDrogras,
 } from "../../Helpers/afection";
+import NavBar from "../../Components/NavBar";
 const Afections = () => {
   const afections = [
     ...respiratorio,
@@ -63,29 +64,22 @@ const Afections = () => {
 
   return (
     <>
-      <Grid container justifyContent="center" align="center">
-        <Grid>
-          <Stack
-            direction="row"
-            alignContent="center"
-            justifyContent="center"
-            gap={2}
-          >
-            <img src={alfaLogo} alt="alfaLogo" height={80} width={80} />
-            <h1 align="center">
-              {" "}
-              Grupo Alfa, Formación en Enfermería y Salud Recursos
-            </h1>
-          </Stack>
-        </Grid>
-        <Grid xs={12}>
-          <Stack direction="row" justifyContent="center">
-            <h3 align="center">
-              Grupo Alfa, Formación en Enfermería y Salud Recursos
-            </h3>
-          </Stack>
-        </Grid>
-      </Grid>
+      <NavBar />
+
+      <Stack direction="row" justifyContent="center">
+        <Typography
+          sx={{
+            fontWeight: "700",
+            fontSize: {
+              xs: 20,
+              md: 30,
+            },
+          }}
+          align="center"
+        >
+          NTISS (Sistema de Puntuación de Intervención Terapéutica Neonatal)
+        </Typography>
+      </Stack>
       <Grid container gap={3} justifyContent="center">
         <Grid container xs={10} gap={2}>
           {" "}
