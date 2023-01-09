@@ -46,7 +46,7 @@ export const respiratorio = [
   },
   {
     id: 11,
-    name: "extracorpórea ECMO",
+    name: "Oxigenación extracorpórea ECMO",
     points: 4,
   },
 ];
@@ -168,7 +168,7 @@ export const metabolicoNutricion = [
   },
   {
     id: 34,
-    name: "Fototerapia",
+    name: " Luminoterapia",
     points: 1,
   },
   {
