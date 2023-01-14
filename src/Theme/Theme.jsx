@@ -1,18 +1,17 @@
 import { createTheme } from "@mui/material/styles";
-import { red } from "@mui/material/colors";
+
 // Create a theme instance.
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#0d47a1",
-      light: "#bbdefb",
+      main: "#5e5e5e",
     },
     secondary: {
-      main: "#19857b",
+      main: "#2b76d2",
     },
   },
   typography: {
-    fontFamily: `"Poppins", "Helvetica", "Arial", sans-serif`,
+    fontFamily: `"Open Sans", "arial", "Arial", sans-serif`,
   },
 });
 export default theme;
